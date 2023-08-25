@@ -1,0 +1,35 @@
+{
+  "sdkName": "test-sdk",
+  "specFilePath": "http://127.0.0.1:8000/openapi.json",
+  "languages": [
+    "python",
+    "typescript",
+    "java"
+  ],
+  "createDocs": false,
+  "customizations": {
+    "authentication": {},
+    "generateEnv": true,
+    "multiTenant": false,
+    "license": "MIT",
+    "retry": {
+      "enabled": true,
+      "retryDelay": 150,
+      "maxAttempts": 3
+    },
+    "injectedModels": [],
+    "inferServiceNames": false
+  },
+  "languageOptions": {
+    "python": {
+      "pypiPackageName": "",
+      "alwaysInitializeOptionals": false,
+      "githubRepoName": "",
+      "sdkVersion": "1.0.0",
+      "ignoreFiles": []
+    }
+  },
+  "publishing": {
+    "githubOrg": ""
+  }
+}
