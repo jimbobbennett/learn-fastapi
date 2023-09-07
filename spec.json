@@ -1,0 +1,278 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+      "title": "FastAPI",
+      "description": "A test API for LibLab",
+      "contact": {
+        "name": "JimBobBennett",
+        "url": "https://jimbobbennett.dev/"
+      },
+      "version": "0.1.0"
+    },
+    "servers": [
+      {
+        "url": "http://na.exciting.soda/",
+        "description": "Prod"
+      },
+      {
+        "url": "http://eu.exciting.soda/",
+        "description": "EU"
+      }
+    ],
+    "paths": {
+      "/movie": {
+        "get": {
+          "tags": [
+            "streaming"
+          ],
+          "summary": "Get a list of movies",
+          "description": "Returns a list of movies",
+          "operationId": "getMovies",
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Movie"
+                    },
+                    "type": "array",
+                    "title": "Response Getmovies"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/movie/{id}": {
+        "get": {
+          "tags": [
+            "streaming"
+          ],
+          "summary": "Get a movie by id",
+          "description": "Returns a movie by Id",
+          "operationId": "getMovieById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "title": "Id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Movie"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/series": {
+        "get": {
+          "tags": [
+            "streaming"
+          ],
+          "summary": "Get a list of series",
+          "description": "Returns a list of series",
+          "operationId": "getSeries",
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/Series"
+                    },
+                    "type": "array",
+                    "title": "Response Getseries"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/series/{id}": {
+        "get": {
+          "tags": [
+            "streaming"
+          ],
+          "summary": "Get a series by id",
+          "description": "Returns a series by Id",
+          "operationId": "getSeriesById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "title": "Id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Series"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "HTTPValidationError": {
+          "properties": {
+            "detail": {
+              "items": {
+                "$ref": "#/components/schemas/ValidationError"
+              },
+              "type": "array",
+              "title": "Detail"
+            }
+          },
+          "type": "object",
+          "title": "HTTPValidationError"
+        },
+        "Movie": {
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id"
+            },
+            "movie_name": {
+              "type": "string",
+              "title": "Movie Name"
+            },
+            "cast": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "title": "Cast"
+            }
+          },
+          "type": "object",
+          "required": [
+            "id",
+            "movie_name",
+            "cast"
+          ],
+          "title": "Movie"
+        },
+        "Series": {
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id"
+            },
+            "series_name": {
+              "type": "string",
+              "title": "Series Name"
+            },
+            "cast": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "title": "Cast"
+            },
+            "episodes": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "title": "Episodes"
+            }
+          },
+          "type": "object",
+          "required": [
+            "id",
+            "series_name",
+            "cast",
+            "episodes"
+          ],
+          "title": "Series"
+        },
+        "ValidationError": {
+          "properties": {
+            "loc": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ]
+              },
+              "type": "array",
+              "title": "Location"
+            },
+            "msg": {
+              "type": "string",
+              "title": "Message"
+            },
+            "type": {
+              "type": "string",
+              "title": "Error Type"
+            }
+          },
+          "type": "object",
+          "required": [
+            "loc",
+            "msg",
+            "type"
+          ],
+          "title": "ValidationError"
+        }
+      }
+    },
+    "tags": [
+      {
+        "name": "streaming",
+        "description": "Streaming content like movies and series."
+      }
+    ]
+  }

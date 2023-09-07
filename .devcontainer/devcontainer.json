@@ -20,7 +20,8 @@
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/npm-package:1": {
 			"package": "liblab"
-		}
+		},
+		"ghcr.io/devcontainers/features/java:1": {}
 	}
 
 	// Configure tool-specific properties.
